@@ -1,0 +1,286 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Demo1.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Demo1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 Demo1"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Demo1 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2014",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_DEMO1_DIALOG DIALOGEX 0, 0, 545, 345
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Demo1"
+FONT 9, "宋体"
+BEGIN
+    LTEXT           "扇区：",IDC_STATIC,59,131,25,8
+    COMBOBOX        IDC_COMBO_PAGE,92,131,48,62,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "块号：",IDC_STATIC,154,131,25,8
+    COMBOBOX        IDC_COMBO_BLOCK,187,131,48,58,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "块0信息：",IDC_STATIC,30,172,37,8
+    LTEXT           "块1信息：",IDC_STATIC,30,204,37,8
+    LTEXT           "块2信息：",IDC_STATIC,30,232,37,8
+    LTEXT           "块3信息：",IDC_STATIC,30,259,37,8
+    EDITTEXT        IDC_EDIT_B0,83,165,172,20,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_B2,83,225,172,20,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_B1,83,195,172,20,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_B3,83,255,172,20,ES_AUTOHSCROLL
+    PUSHBUTTON      "读扇区",IDC_BUTN_READ_PAGE,39,299,50,14
+    PUSHBUTTON      "读块",IDC_BUTN_READ_BLOCK,116,299,50,14
+    PUSHBUTTON      "写块",IDC_BUTN_WRITE_BLOCK,193,299,50,14
+    GROUPBOX        "卡片读写操作",IDC_STATIC,14,109,263,220
+    CONTROL         "秘钥A",IDC_RADIO_A,"Button",BS_AUTORADIOBUTTON,346,45,
+                    36,10
+    CONTROL         "秘钥B",IDC_RADIO_B,"Button",BS_AUTORADIOBUTTON,425,45,
+                    36,10
+    LTEXT           "秘钥：",IDC_STATIC,300,75,25,8
+    EDITTEXT        IDC_EDIT_CODE,337,71,118,17,ES_AUTOHSCROLL
+    PUSHBUTTON      "默认秘钥",IDC_BUTN_KEY,469,71,50,14
+    GROUPBOX        "秘钥设置",IDC_STATIC,287,23,241,77
+    LTEXT           "状态：",IDC_STATIC,29,34,25,8
+    EDITTEXT        IDC_open,77,33,105,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "开启设备",IDC_BUTTON1_open,194,34,50,14
+    LTEXT           "序列号：",IDC_STATIC,25,64,33,8
+    PUSHBUTTON      "寻卡",IDC_BUTTON2_uid,193,63,50,14
+    EDITTEXT        IDC_UID,75,61,107,14,ES_AUTOHSCROLL
+    GROUPBOX        "开启卡片",IDC_STATIC,16,23,256,79
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Demo1 Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "Demo1\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2014\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Demo1.EXE\0"
+            VALUE "ProductName", "Demo1 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_DEMO1_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 538
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 338
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DEMO1_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0030, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0033, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0034, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0035, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0036, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0037, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0038, 
+    IDC_COMBO_PAGE, 0x403, 2, 0
+0x0039, 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_PAGE, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_BLOCK, 0x403, 2, 0
+0x0030, 
+    IDC_COMBO_BLOCK, 0x403, 2, 0
+0x0031, 
+    IDC_COMBO_BLOCK, 0x403, 2, 0
+0x0032, 
+    IDC_COMBO_BLOCK, 0x403, 2, 0
+0x0033, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 Demo1(&A)..."
+END
+
+#endif    // Chinese (中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\Demo1.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
