@@ -75,6 +75,9 @@ void CDemo1Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDemo1Dlg)
+	DDX_Control(pDX, IDC_EDIT2, m_balance);
+	DDX_Control(pDX, IDC_COMBO_BLOCK2, m_block2);
+	DDX_Control(pDX, IDC_COMBO_PAGE2, m_page2);
 	DDX_Control(pDX, IDC_UID, m_uid);
 	DDX_Control(pDX, IDC_open, m_open);
 	DDX_Control(pDX, IDC_COMBO_BLOCK, m_block);
@@ -92,6 +95,10 @@ BEGIN_MESSAGE_MAP(CDemo1Dlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTN_KEY, OnButnKey)
 	ON_BN_CLICKED(IDC_BUTTON1_open, OnBUTTON1open)
 	ON_BN_CLICKED(IDC_BUTTON2_uid, OnBUTTON2uid)
+	ON_BN_CLICKED(IDC_BUTTON_wallet_init, OnBUTTONwalletinit)
+	ON_BN_CLICKED(IDC_BUTTON_balance, OnBUTTONbalance)
+	ON_BN_CLICKED(IDC_BUTTON_recharge, OnBUTTONrecharge)
+	ON_BN_CLICKED(IDC_BUTTON_deduct, OnBUTTONdeduct)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -322,4 +329,88 @@ void CDemo1Dlg::OnBUTTON2uid()
 	else
 		m_uid.SetWindowText("获取序列号失败！");
 	
+}
+
+void CDemo1Dlg::OnBUTTONwalletinit() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	long account=0;
+	page = m_page2.GetCurSel();
+	block = m_block2.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	write_account(page,block,pswtype,psw,account);
+	m_wallet_init.SetWindowText(account);
+}
+
+void CDemo1Dlg::OnBUTTONbalance() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	long account[1024];
+	page = m_page2.GetCurSel();
+	block = m_block2.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	read_account(page,block,pswtype,psw,account);   //account为指针，暂时为找出指针，函数错误，待修改；
+	m_balance.SetWindowText(account);	
+}
+
+void CDemo1Dlg::OnBUTTONrecharge() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	long add_account;
+	page = m_page2.GetCurSel();
+	block = m_block2.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	add_account=GetDlgItem(IDC_amout1)
+	add_account(page,block,pswtype,psw,add_account);	
+}
+
+void CDemo1Dlg::OnBUTTONdeduct() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	long sub_account;
+	page = m_page2.GetCurSel();
+	block = m_block2.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	sub_account=GetDlgItem(IDC_amout2)
+	sub_account(page,block,pswtype,psw,sub_account);	
 }

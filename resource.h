@@ -24,6 +24,17 @@
 #define IDC_BUTTON1_open                1015
 #define IDC_BUTTON2_uid                 1016
 #define IDC_UID                         1017
+#define IDC_COMBO_PAGE2                 1018
+#define IDC_COMBO_BLOCK2                1019
+#define IDC_EDIT2                       1020
+#define IDC_BUTTON_wallet_init          1021
+#define IDC_BUTTON_balance              1022
+#define IDC_amout1                      1023
+#define IDC_BUTTON_recharge             1024
+#define IDC_amout2                      1025
+#define IDC_BUTTON_deduct               1026
+#define IDC_state                       1027
+#define IDC_wallet_state                1028
 
 // Next default values for new objects
 // 
@@ -31,7 +42,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        130
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_CONTROL_VALUE         1029
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
