@@ -30,7 +30,7 @@ ImplementationFile=Demo1Dlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_BUTTON_deduct
+LastObject=IDC_EDIT_B0
 
 [CLS:CAboutDlg]
 Type=0

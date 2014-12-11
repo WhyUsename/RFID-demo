@@ -139,8 +139,8 @@ BEGIN
     LTEXT           "金额:",IDC_STATIC,306,257,21,8
     EDITTEXT        IDC_amout2,332,254,116,14,ES_AUTOHSCROLL
     PUSHBUTTON      "扣款",IDC_BUTTON_deduct,457,251,50,14
-    LTEXT           "状态：",IDC_state,307,297,25,8
-    EDITTEXT        IDC_wallet_state,335,293,173,14,ES_AUTOHSCROLL
+    LTEXT           "状态：",IDC_state,306,290,25,8
+    EDITTEXT        IDC_wallet_state,334,286,173,14,ES_AUTOHSCROLL
     GROUPBOX        "电子钱包",IDC_STATIC,288,110,241,218
 END
 

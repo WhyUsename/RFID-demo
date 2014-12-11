@@ -16,6 +16,7 @@ static char THIS_FILE[] = __FILE__;
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
+long *account;
 
 class CAboutDlg : public CDialog
 {
@@ -75,6 +76,12 @@ void CDemo1Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDemo1Dlg)
+	DDX_Control(pDX, IDC_amout2, m_Sub);
+	DDX_Control(pDX, IDC_EDIT_B3, m_B3);
+	DDX_Control(pDX, IDC_EDIT_B2, m_B2);
+	DDX_Control(pDX, IDC_EDIT_B1, m_B1);
+	DDX_Control(pDX, IDC_EDIT_B0, m_B0);
+	DDX_Control(pDX, IDC_amout1, m_Charge);
 	DDX_Control(pDX, IDC_EDIT2, m_balance);
 	DDX_Control(pDX, IDC_COMBO_BLOCK2, m_block2);
 	DDX_Control(pDX, IDC_COMBO_PAGE2, m_page2);
@@ -99,6 +106,7 @@ BEGIN_MESSAGE_MAP(CDemo1Dlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_balance, OnBUTTONbalance)
 	ON_BN_CLICKED(IDC_BUTTON_recharge, OnBUTTONrecharge)
 	ON_BN_CLICKED(IDC_BUTTON_deduct, OnBUTTONdeduct)
+	ON_BN_CLICKED(IDC_BUTN_WRITE_BLOCK, OnButnWriteBlock)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -186,73 +194,6 @@ HCURSOR CDemo1Dlg::OnQueryDragIcon()
 	return (HCURSOR) m_hIcon;
 }
 
-void CDemo1Dlg::OnButnReadBlock() 
-{
-	// TODO: Add your control notification handler code here
-	int page;
-	int block;
-	unsigned char pswtype;
-	unsigned char psw[1024];
-	unsigned char buff[1024];
-	int buff_len;
-	CString s0,s1,getcode,code;
-
-	page = m_page.GetCurSel();
-	block = m_block.GetCurSel();
-	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
-	switch (Key)
-	{
-	case IDC_RADIO_A : pswtype = 0x0A;  break;
-	case IDC_RADIO_B : pswtype = 0x0B;  break;
-	default : break;
-	}
-
-
-	
-UpdateData(TRUE);
-m_code.GetWindowText(getcode);
-stringtohex(getcode,psw);	
-code="FFFFFFFFFFFF";
-
-if(getcode == code)
-{
-		int j = read_block(page,block,pswtype,psw,buff,&buff_len);
-		if(j == 0)
-		{
-			s0.Empty();
-			for (int k=0;k<buff_len;k++)
-			{
-				char ch = buff[k];
-				s1.Format("%02x",buff[k]);
-				s0+=s1;
-			}
-
-			switch(block)
-			{
-			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText(s0); break;
-			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText(s0); break;
-			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText(s0); break;
-			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText(s0); break;
-			default: break;
-			}
-		}
-		else
-		{
-		switch (block)
-			{
-			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText("读取块0信息失败！"); break;
-			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText("读取块1信息失败！"); break;
-			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText("读取块2信息失败！"); break;
-			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText("读取块3信息失败！"); break;
-			default:break;
-			}
-		}
-}
-else 	MessageBox("输入密码错误！");
-		
-
-
-}
 
 void CDemo1Dlg::OnButnKey() 
 {
@@ -336,9 +277,12 @@ void CDemo1Dlg::OnBUTTONwalletinit()
 	// TODO: Add your control notification handler code here
 	int page;
 	int block;
+	CString getcode;
 	unsigned char pswtype;
 	unsigned char psw[1024];
-	long account=0;
+	char a[5];
+	account = new long;
+	*account = 1;
 	page = m_page2.GetCurSel();
 	block = m_block2.GetCurSel();
 	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
@@ -348,8 +292,13 @@ void CDemo1Dlg::OnBUTTONwalletinit()
 	case IDC_RADIO_B : pswtype = 0x0B;  break;
 	default : break;
 	}
-	write_account(page,block,pswtype,psw,account);
-	m_wallet_init.SetWindowText(account);
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);
+	int i=write_account(block,page,pswtype,psw,*account);
+	if(i==0)
+		m_balance.SetWindowText("successs");
+	else 
+		m_balance.SetWindowText(itoa(i,a,10));
 }
 
 void CDemo1Dlg::OnBUTTONbalance() 
@@ -358,8 +307,10 @@ void CDemo1Dlg::OnBUTTONbalance()
 	int page;
 	int block;
 	unsigned char pswtype;
+	CString getcode;
 	unsigned char psw[1024];
-	long account[1024];
+	//long * account=new long();
+	char s[25];
 	page = m_page2.GetCurSel();
 	block = m_block2.GetCurSel();
 	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
@@ -369,8 +320,10 @@ void CDemo1Dlg::OnBUTTONbalance()
 	case IDC_RADIO_B : pswtype = 0x0B;  break;
 	default : break;
 	}
-	read_account(page,block,pswtype,psw,account);   //account为指针，暂时为找出指针，函数错误，待修改；
-	m_balance.SetWindowText(account);	
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);
+	read_account(block,page,pswtype,psw,account);
+	m_balance.SetWindowText(itoa(*account,s,10));	
 }
 
 void CDemo1Dlg::OnBUTTONrecharge() 
@@ -380,7 +333,10 @@ void CDemo1Dlg::OnBUTTONrecharge()
 	int block;
 	unsigned char pswtype;
 	unsigned char psw[1024];
-	long add_account;
+	long addaccount;
+	char s[25];
+	memset(s,0,sizeof(s));
+	CString getcode,getcode2;
 	page = m_page2.GetCurSel();
 	block = m_block2.GetCurSel();
 	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
@@ -390,8 +346,11 @@ void CDemo1Dlg::OnBUTTONrecharge()
 	case IDC_RADIO_B : pswtype = 0x0B;  break;
 	default : break;
 	}
-	add_account=GetDlgItem(IDC_amout1)
-	add_account(page,block,pswtype,psw,add_account);	
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);
+	m_Charge.GetWindowText(getcode2);
+	addaccount=atoi(getcode2);
+	add_account(page,block,pswtype,psw,addaccount);	
 }
 
 void CDemo1Dlg::OnBUTTONdeduct() 
@@ -399,11 +358,16 @@ void CDemo1Dlg::OnBUTTONdeduct()
 	// TODO: Add your control notification handler code here
 	int page;
 	int block;
+	CString getcode,getcode2;
 	unsigned char pswtype;
 	unsigned char psw[1024];
-	long sub_account;
+	long subaccount;
 	page = m_page2.GetCurSel();
 	block = m_block2.GetCurSel();
+
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);
+
 	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
 	switch (Key)
 	{
@@ -411,6 +375,142 @@ void CDemo1Dlg::OnBUTTONdeduct()
 	case IDC_RADIO_B : pswtype = 0x0B;  break;
 	default : break;
 	}
-	sub_account=GetDlgItem(IDC_amout2)
-	sub_account(page,block,pswtype,psw,sub_account);	
+
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);
+	m_Sub.GetWindowText(getcode2);
+	subaccount=atoi(getcode2);
+	sub_account(page,block,pswtype,psw,subaccount);	
+}
+
+void CDemo1Dlg::OnButnWriteBlock() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	unsigned char src_data[1024];
+	int src_len;
+	CString s0,s1,getcode,code,getcode2;
+
+	page = m_page.GetCurSel();
+	block = m_block.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	
+	UpdateData(TRUE);
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);	
+	code="FFFFFFFFFFFF";
+
+if(getcode == code)
+{
+	switch(block){
+	case 0:
+			m_B0.GetWindowText(getcode2);break;
+	case 1:
+			m_B1.GetWindowText(getcode2);break;
+	case 2:
+			m_B2.GetWindowText(getcode2);break;
+	case 3:
+			m_B3.GetWindowText(getcode2);break;
+	}
+		stringtohex(getcode2,src_data);
+		src_len = getcode2.GetLength();
+		int j = write_block(block,page,pswtype,psw,src_data,src_len);	
+		if(j == 0)
+		{
+			switch(block)
+			{
+			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText("写入块0信息成功"); break;
+			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText("写入块1信息成功"); break;
+			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText("写入块2信息成功"); break;
+			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText("写入块3信息成功"); break;
+			default: break;
+			}
+		}
+		else
+		{
+		switch (block)
+			{
+			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText("写入块0信息失败！"); break;
+			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText("写入块1信息失败！"); break;
+			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText("写入块2信息失败！"); break;
+			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText("写入块3信息失败！"); break;
+			default:break;
+			}
+		}
+	}
+else 	MessageBox("输入密码错误！");	
+
+}
+
+void CDemo1Dlg::OnButnReadBlock() 
+{
+	// TODO: Add your control notification handler code here
+	int page;
+	int block;
+	unsigned char pswtype;
+	unsigned char psw[1024];
+	unsigned char buff[1024];
+	int buff_len;
+	CString s0,s1,getcode,code;
+
+	page = m_page.GetCurSel();
+	block = m_block.GetCurSel();
+	UINT Key = GetCheckedRadioButton(IDC_RADIO_A,IDC_RADIO_B);
+	switch (Key)
+	{
+	case IDC_RADIO_A : pswtype = 0x0A;  break;
+	case IDC_RADIO_B : pswtype = 0x0B;  break;
+	default : break;
+	}
+	
+	UpdateData(TRUE);
+	m_code.GetWindowText(getcode);
+	stringtohex(getcode,psw);	
+	code="FFFFFFFFFFFF";
+
+if(getcode == code)
+{
+		int j = read_block(page,block,pswtype,psw,buff,&buff_len);
+		if(j == 0)
+		{
+			s0.Empty();
+			for (int k=0;k<buff_len;k++)
+			{
+				char ch = buff[k];
+				s1.Format("%02x",buff[k]);
+				s0+=s1;
+			}
+
+			switch(block)
+			{
+			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText(s0); break;
+			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText(s0); break;
+			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText(s0); break;
+			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText(s0); break;
+			default: break;
+			}
+		}
+		else
+		{
+		switch (block)
+			{
+			case 0: GetDlgItem(IDC_EDIT_B0)->SetWindowText("读取块0信息失败！"); break;
+			case 1: GetDlgItem(IDC_EDIT_B1)->SetWindowText("读取块1信息失败！"); break;
+			case 2: GetDlgItem(IDC_EDIT_B2)->SetWindowText("读取块2信息失败！"); break;
+			case 3: GetDlgItem(IDC_EDIT_B3)->SetWindowText("读取块3信息失败！"); break;
+			default:break;
+			}
+		}
+	}
+else 	MessageBox("输入密码错误！");	
+
 }

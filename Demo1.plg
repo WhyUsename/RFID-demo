@@ -6,50 +6,30 @@
 --------------------Configuration: Demo1 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\temp\RSPEE05.tmp" with contents
+Creating temporary file "C:\temp\RSP26BD.tmp" with contents
 [
-/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Demo1.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"C:\Users\user306\Desktop\ReadBlock\Demo1Dlg.cpp"
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Users\user306\Desktop\RFID-demo12_11\RFID-demo\RFID-demo\Demo1.cpp"
+"C:\Users\user306\Desktop\RFID-demo12_11\RFID-demo\RFID-demo\Demo1Dlg.cpp"
 ]
-Creating command line "cl.exe @C:\temp\RSPEE05.tmp" 
-Creating command line "link.exe ZM124U.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Demo1.pdb" /debug /machine:I386 /out:"Debug/Demo1.exe" /pdbtype:sept  .\Debug\Demo1.obj .\Debug\Demo1Dlg.obj .\Debug\StdAfx.obj .\Debug\Demo1.res "
+Creating command line "cl.exe @C:\temp\RSP26BD.tmp" 
+Creating command line "link.exe ZM124U.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Demo1.pdb" /debug /machine:I386 /out:"Debug/Demo1.exe" /pdbtype:sept  ".\Debug\Demo1.obj" ".\Debug\Demo1Dlg.obj" ".\Debug\StdAfx.obj" ".\Debug\Demo1.res" "
 <h3>Output Window</h3>
 Compiling...
 Demo1Dlg.cpp
-c:\program files\microsoft visual studio\vc98\include\crtdbg.h(536) : error C2833: 'operator DEBUG_NEW' is not a recognized operator or type
-c:\program files\microsoft visual studio\vc98\include\crtdbg.h(536) : error C2059: syntax error : 'newline'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(674) : error C2833: 'operator DEBUG_NEW' is not a recognized operator or type
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(674) : error C2059: syntax error : 'newline'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(674) : error C2238: unexpected token(s) preceding ';'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(675) : error C2833: 'operator DEBUG_NEW' is not a recognized operator or type
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(675) : error C2059: syntax error : 'newline'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(675) : error C2238: unexpected token(s) preceding ';'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(683) : error C2833: 'operator DEBUG_NEW' is not a recognized operator or type
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(683) : error C2059: syntax error : 'newline'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(683) : error C2238: unexpected token(s) preceding ';'
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(1631) : error C2833: 'operator DEBUG_NEW' is not a recognized operator or type
-c:\program files\microsoft visual studio\vc98\mfc\include\afx.h(1631) : error C2059: syntax error : 'newline'
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(122) : error C2059: syntax error : 'string'
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(123) : error C2091: function returns function
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(123) : error C2802: static member 'operator new' has no formal parameters
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(123) : error C2333: 'new' : error in function declaration; skipping function body
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(131) : error C2059: syntax error : 'string'
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(131) : error C2091: function returns function
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(131) : error C2802: static member 'operator new' has no formal parameters
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(135) : error C2059: syntax error : 'string'
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(135) : error C2091: function returns function
-c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(135) : error C2556: 'void *(__cdecl *__stdcall CNoTrackObject::operator new(void))(unsigned int,const char *,int)' : overloaded function differs only by return type from 'void *(__cdecl *__stdcall CNoTrackObject::operator new(void))(unsigned int)'
-        c:\program files\microsoft visual studio\vc98\mfc\include\afxtls_.h(131) : see declaration of 'new'
-c:\users\user306\desktop\readblock\demo1dlg.cpp(350) : error C2065: 'm_wallet_init' : undeclared identifier
-c:\users\user306\desktop\readblock\demo1dlg.cpp(350) : error C2228: left of '.SetWindowTextA' must have class/struct/union type
-c:\users\user306\desktop\readblock\demo1dlg.cpp(371) : error C2664: 'SetWindowTextA' : cannot convert parameter 1 from 'long [1024]' to 'const char *'
-        Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-Ö´ÐÐ cl.exe Ê±³ö´í.
+Generating Code...
+Compiling...
+Demo1.cpp
+Generating Code...
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/Demo1.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\Demo1.sbr" ".\Debug\Demo1Dlg.sbr""
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-Demo1.exe - 1 error(s), 0 warning(s)
+Demo1.exe - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>

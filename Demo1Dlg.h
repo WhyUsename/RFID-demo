@@ -22,6 +22,12 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CDemo1Dlg)
 	enum { IDD = IDD_DEMO1_DIALOG };
+	CEdit	m_Sub;
+	CEdit	m_B3;
+	CEdit	m_B2;
+	CEdit	m_B1;
+	CEdit	m_B0;
+	CEdit	m_Charge;
 	CEdit	m_balance;
 	CComboBox	m_block2;
 	CComboBox	m_page2;
@@ -56,6 +62,7 @@ protected:
 	afx_msg void OnBUTTONbalance();
 	afx_msg void OnBUTTONrecharge();
 	afx_msg void OnBUTTONdeduct();
+	afx_msg void OnButnWriteBlock();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
